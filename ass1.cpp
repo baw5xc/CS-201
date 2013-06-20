@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include<stdlib.h>
@@ -13,14 +12,14 @@ int main(){
     int combatRound = 0;
     srand(time(NULL)); // seed pseudo-random #'s
     int playerHP = 20;
-    int playerAtk = rand() % 6 + 3;
-    int playerDef = rand() % 6 + 3;
-    int playerAgi = rand() % 6 + 3;
+    int playerAtk = rand() % 4 + 5;
+    int playerDef = rand() % 4 + 5;
+    int playerAgi = rand() % 4 + 5;
     
     int enemyHP = 20;
-    int enemyAtk = rand() % 6 + 2;
-    int enemyDef = rand() % 6 + 2;
-    int enemyAgi = rand() % 6 + 2; 
+    int enemyAtk = rand() % 3 + 5;
+    int enemyDef = rand() % 3 + 5;
+    int enemyAgi = rand() % 3 + 5; 
     
     int delayLength = 500;
     
