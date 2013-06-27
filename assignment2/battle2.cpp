@@ -18,7 +18,8 @@ using namespace std;
 //----------------------------------------------------------------------------------------------------------
 
 
-void DisplayTitleScreen(){
+void DisplayTitleScreen()
+{
 	cout << "###    ##   ##### #####  #    ####  ##" << endl;
     cout << "#  #  #  #    #     #    #    #     ##" << endl;
     cout << "###   ####    #     #    #    ####  ##" << endl;
@@ -34,40 +35,65 @@ void DisplayTitleScreen(){
 //----------------------------------------------------------------------------------------------------------
 
 
-void DisplayRoundMenu( int combatRound, Character player, Character enemy){
+void DisplayRoundMenu( int combatRound, Character player, Character enemy)
+{
     
-    std::cout << endl;
-    std::cout << "###########################################\n";
-    std::cout << "-------------------------------------------\n";
-    std::cout <<  "ROUND " << combatRound << endl;
-    std::cout << player.name <<" STATS:\n";
-    std::cout << player.name << " HP: " << player.HP << endl;
-    std::cout << player.name << " ATK: " << player.atk << endl;
-    std::cout << player.name << " DEF: " << player.def << endl;
-    std::cout << player.name << " AGI: " << player.agi << endl;
-    std::cout << endl;
-	std::cout << enemy.name <<" STATS:\n";
-    std::cout << enemy.name << " HP: " << enemy.HP << endl;
-    std::cout << enemy.name << " ATK: " << enemy.atk << endl;
-    std::cout << enemy.name << " DEF: " << enemy.def << endl;
-    std::cout << enemy.name << " AGI: " << enemy.agi << endl;
-    std::cout << endl;
-    std::cout << "-------------------------------------------\n";
-    std::cout << "1. Quick Attack\n";
-    std::cout << "2. Standard Attack\n";
-    std::cout << "3. Heavy Attack\n";
-    std::cout << "What will you do? \n";
+    cout << endl;
+    cout << "###########################################\n";
+    cout << "-------------------------------------------\n";
+    cout <<  "ROUND " << combatRound << endl;
+    cout << player.name <<" STATS:\n";
+    cout << player.name << " HP: " << player.HP << endl;
+    cout << player.name << " ATK: " << player.atk << endl;
+    cout << player.name << " DEF: " << player.def << endl;
+    cout << player.name << " AGI: " << player.agi << endl;
+    cout << endl;
+	cout << enemy.name <<" STATS:\n";
+    cout << enemy.name << " HP: " << enemy.HP << endl;
+    cout << enemy.name << " ATK: " << enemy.atk << endl;
+    cout << enemy.name << " DEF: " << enemy.def << endl;
+    cout << enemy.name << " AGI: " << enemy.agi << endl;
+    cout << endl;
+    cout << "-------------------------------------------\n";
+    cout << "1. Quick Attack\n";
+    cout << "2. Standard Attack\n";
+    cout << "3. Heavy Attack\n";
+    cout << "What will you do? \n";
     
 }
 
 //----------------------------------------------------------------------------------------------------------
+void showStats(Character x, Character y)
+{
+	cout << x.name <<" STATS:\n";
+    cout << x.name << " HP: " << x.HP << endl;
+    cout << x.name << " ATK: " << x.atk << endl;
+    cout << x.name << " DEF: " << x.def << endl;
+    cout << x.name << " AGI: " << x.agi << endl;
+    cout << endl;
+	cout << y.name <<" STATS:\n";
+    cout << y.name << " HP: " << y.HP << endl;
+    cout << y.name << " ATK: " << y.atk << endl;
+    cout << y.name << " DEF: " << y.def << endl;
+    cout << y.name << " AGI: " << y.agi << endl;
+    cout << endl;
+	cout << endl;
+}
+//----------------------------------------------------------------------------------------------------------
 
-Character AdjustStats(Character character, int attackChoice){
-    if (attackChoice == 1) {
+Character AdjustStats(Character character, int attackChoice)
+{
+
+	character.adjustedAgi = character.agi;
+	character.adjustedAtk = character.atk;
+
+    if (attackChoice == 1) 
+	{
         character.adjustedAgi = character.agi + 2;
         character.adjustedAtk = character.atk - 1;
     }
-    else if (attackChoice == 3){
+    else if (attackChoice == 3)
+	{
         character.adjustedAtk = character.atk + 2;
         character.adjustedAgi = character.agi - 1;
     }
@@ -77,7 +103,8 @@ Character AdjustStats(Character character, int attackChoice){
 
 //----------------------------------------------------------------------------------------------------------
 
-void AllocateStats(Character player){
+Character AllocateStats(Character player)
+{
     cout << endl;
     cout << "You must allocate five additional character points\n";
 	cout <<	"to your character's attack, defense,or agility. \n";
@@ -87,7 +114,8 @@ void AllocateStats(Character player){
     cout << "3. Defense\n";
     cout << "4. Agility\n\n";
     int characterPoints = 5;
-    while (characterPoints != 0){
+    while (characterPoints != 0)
+	{
         cout << "HP: " << player.HP << endl;
         cout << "ATK: " << player.atk << endl;
         cout << "DEF: " << player.def << endl;
@@ -96,43 +124,82 @@ void AllocateStats(Character player){
 		cout << endl;
         int option;
         cin >> option;
-        if (option == 1){
+        if (option == 1)
+		{
             player.HP += 4;
         }
-        else if (option == 2){
+        else if (option == 2)
+		{
             player.atk += 1;
         }
-        else if (option == 3){
+        else if (option == 3)
+		{
             player.def += 1;
         }
-        else if (option == 4){
+        else if (option == 4)
+		{
             player.agi += 1;
         }
         characterPoints--;
         cout << "You have " << characterPoints << " remaining character points.\n" << endl;
         
     }
+	return player;
+}
+//----------------------------------------------------------------------------------------------------------
+Character allocateEnemyStats(Character enemy)
+{
 	
+	int enemyStats[] = {enemy.atk, enemy.def, enemy.agi, enemy.HP};
+    int enemyNum;
+    int i = 0;
+    while(i < 5)
+	{
+        enemyNum = rand() % 4;
+		if (enemyStats[enemyNum] ==  enemy.HP)
+		{
+            enemy.HP += 4;
+        }
+        else if(enemyStats[enemyNum] ==  enemy.atk)
+		{
+			enemy.atk += 1;
+        }
+		else if(enemyStats[enemyNum] ==  enemy.def)
+		{
+			enemy.def += 1;
+        }
+		else if(enemyStats[enemyNum] ==  enemy.agi)
+		{
+			enemy.agi += 1;
+        }
+
+        i++;
+    }
+	return enemy;
 }
 //----------------------------------------------------------------------------------------------------------
 
-void BeginPrompt(){
+
+void BeginPrompt()
+{
     
     cout << "You ready for this? (yes/no) ";
     string choice;
     cin >> choice;
     
-    while( choice != "yes"){
+    while( choice != "yes")
+	{
         cout << "Well, what are you waiting for? My show comes on at 6, bro. \n";
         cout << "Ready, now?! (yes/no) ";
         cin >> choice;
-}
+	}
 	
 }
 //----------------------------------------------------------------------------------------------------------
 
 
-void DisplayGameOver(Character player, Character enemy){
+void DisplayGameOver(Character player, Character enemy)
+{
     cout << endl;
     cout << "    #####################################   " << endl;
     cout << " ####                                   ####" << endl;
@@ -141,19 +208,22 @@ void DisplayGameOver(Character player, Character enemy){
     cout << "##                                         ##" << endl;
     cout << endl;
     
-    if ( player.HP <= 0 ){
+    if ( player.HP <= 0 )
+	{
         cout << "Too bad, your city shall now burn!\n";
     }
-    else if (enemy.HP <= 0){
+    else if (enemy.HP <= 0)
+	{
         cout << "Congratulations, you shall be honored with harlems full of women!\n";
     
-}
+	}
 }
     
 //---------------------------------------MAIN---------------------------------------------------------------
 
 
-int main(){
+int main()
+{
     
     DisplayTitleScreen();
     bool done = false;
@@ -162,30 +232,11 @@ int main(){
     
     //creates structure objects player and enemy based on the structure "character".
     
-    Character player =
-	{"PLAYER", 40, rand() % 4 + 5, rand() % 4 + 5, rand() % 4 + 5};
+    Character player = {"PLAYER", 40};
     
-    Character enemy =
-    {"ENEMY", 40, rand() % 4 + 5, rand() % 4 + 5, rand() % 4 + 5};
-    
-    AllocateStats(player);
-    // randomly allocates five additional character points to enemy's stats
-	int enemyStats[] = {enemy.atk, enemy.def, enemy.agi, enemy.HP};
-    int enemyNum;
-    int i = 0;
-    while(i < 5){
-        enemyNum = rand() % 4;
-        if (enemyStats[enemyNum] ==  enemyStats[3]){
-            enemy.HP += 3;
-        }
-        else {
-            enemyStats[enemyNum] += 1;
-        }
-        i++;
-    }
-    int delayLength = 500;
-    
-    Equipment equipment[3];
+    Character enemy =  {"ENEMY", 40};
+
+	Equipment equipment[3];
     equipment[0].Setup("Knight's Pack", 8, 4, 3);
     equipment[1].Setup("Tank's Pack", 4, 8, 3);
     equipment[2].Setup("Rogue's Pack", 4, 3, 8);
@@ -194,10 +245,10 @@ int main(){
 	cout << "Please pick the following equipment by selecting 1, 2, or 3.  \n";
 	cout << endl;
 
-    for (int i = 0; i < 3; i ++){
+    for (int i = 0; i < 3; i ++)
+	{
         equipment[i].PrintInfo();
     }
-    
     
     int equipChoice;
     cin >> equipChoice;
@@ -211,18 +262,24 @@ int main(){
     enemy.def = equipment[enemyEquipChoice].def;
     enemy.agi = equipment[enemyEquipChoice].agi;
     
+    player = AllocateStats(player);
+	enemy = allocateEnemyStats(enemy);              // randomly allocates five additional character points to enemy's stats
+
+    int delayLength = 500;
+    
     cout << endl;
     cout << "_____________\n";
     cout << "FIGHTER STATS\n";
     cout << "_____________\n";
     cout << endl;
-  
     
+	showStats(player, enemy);
     BeginPrompt();
     
+	
 
-
-while ( done == false ){
+while ( done == false )
+{
     combatRound += 1;
     
     DisplayRoundMenu(combatRound, player, enemy);
@@ -230,7 +287,8 @@ while ( done == false ){
     int playerChoice;
     cin >> playerChoice;
     
-    while ( playerChoice < 1 || playerChoice > 3 ){
+    while ( playerChoice < 1 || playerChoice > 3 )
+	{
         cout << "Invalid choice, choose between 1 and 3: ";
         cin >> playerChoice;
         
@@ -255,37 +313,43 @@ while ( done == false ){
     
     int randDiff = rand() % player.adjustedAgi;
     Sleep( delayLength );
-    if ( randDiff >= 1 ){
+    if ( randDiff >= 1 )
+	{
         // calculate damage
         int damage = player.adjustedAtk - (enemy.def / 2);
         cout << "PLAYER hits ENEMY for " << damage << " damage!\n";
         enemy.HP -= damage;
     }
-    else {
+    else 
+	{
         cout << "PLAYER misses!\n";
     }
     Sleep( delayLength );
     randDiff = rand() % enemy.adjustedAgi;
     Sleep( delayLength );
     
-    if ( randDiff >= 1 ){
+    if ( randDiff >= 1 )
+	{
         //Calculate damage
         int damage = enemy.adjustedAtk - (player.def / 2);
         cout << "ENEMY hits PLAYER for " << damage << " damage!\n";
         player.HP -= damage;
     }
-    else {
+    else 
+	{
         cout << "ENEMY misses!\n";
         
     }
     Sleep( delayLength );
     
     //Check to see if either player is knocked out
-    if ( player.HP <= 0 ){
+    if ( player.HP <= 0 )
+	{
         cout << "PLAYER has fallen!\n";
         done = true;
     }
-    else if (enemy.HP <= 0){
+    else if (enemy.HP <= 0)
+	{
         cout << "ENEMY has fallen!\n";
         done = true;
     }

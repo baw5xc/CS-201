@@ -13,14 +13,14 @@ using namespace std;
 
 void Equipment::Setup(string equipname, int attack, int defense, int agility){
     
-    string name = equipname;
-    int atk = attack;
-    int def = defense;
-    int agi = agility;
+    name = equipname;
+    atk = attack;
+    def = defense;
+    agi = agility;
     
 }
 void Equipment::PrintInfo(){
     
-    cout << name << " ATK: " << atk << " DEF: " << def << " AGI: " << agi << endl;
+    cout << "Name: " << name << " ATK: " << atk << " DEF: " << def << " AGI: " << agi << endl;
 }
 
